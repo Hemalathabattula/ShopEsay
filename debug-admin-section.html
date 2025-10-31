@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔍 Debug Admin Section</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .debug-section { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .highlight { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3; }
+        .error { background: #ffebee; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #f44336; }
+        .success { background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-warning { background: #f59e0b; color: white; }
+        button:hover { opacity: 0.9; }
+        .code-block { background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 14px; overflow-x: auto; }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; border-left: 4px solid #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Debug Admin Section on Home Page</h1>
+        
+        <div class="debug-section">
+            <h2>🎯 Issue Analysis</h2>
+            <div class="error">
+                <h3>❌ Problem:</h3>
+                <p>Admin login and signup options are not visible on the home page despite being added to HomePage.tsx</p>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2>🔍 Debugging Steps</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button class="btn-primary" onclick="checkHomePage()">🏠 Check Home Page</button>
+                <button class="btn-success" onclick="checkAdminRoutes()">🔗 Check Admin Routes</button>
+                <button class="btn-warning" onclick="inspectPageSource()">📄 Inspect Source</button>
+            </div>
+
+            <div class="highlight">
+                <h3>🔧 Possible Causes:</h3>
+                <ul>
+                    <li><strong>Caching Issue:</strong> Browser or development server cache</li>
+                    <li><strong>Build Issue:</strong> Changes not compiled properly</li>
+                    <li><strong>CSS Issue:</strong> Admin section might be hidden by CSS</li>
+                    <li><strong>JavaScript Error:</strong> Component not rendering due to error</li>
+                    <li><strong>Import Issue:</strong> Missing icon imports causing render failure</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2>📋 Expected Admin Section</h2>
+            <div class="success">
+                <h3>✅ What Should Be Visible:</h3>
+                <ul>
+                    <li><strong>Section Title:</strong> "Admin Control Panel"</li>
+                    <li><strong>Features Grid:</strong> User Management, Analytics, Security, Settings</li>
+                    <li><strong>Credentials Box:</strong> Username: admin, Password: admin123</li>
+                    <li><strong>Admin Login Button:</strong> Purple button linking to /admin-login</li>
+                    <li><strong>Admin Signup Button:</strong> Outlined button linking to /admin-signup</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2>🛠️ Quick Fixes to Try</h2>
+            <div class="highlight">
+                <h3>🔄 Troubleshooting Actions:</h3>
+                <ol>
+                    <li><strong>Hard Refresh:</strong> Ctrl+F5 or Cmd+Shift+R</li>
+                    <li><strong>Clear Cache:</strong> Clear browser cache and cookies</li>
+                    <li><strong>Check Console:</strong> Look for JavaScript errors in browser console</li>
+                    <li><strong>Restart Dev Server:</strong> Stop and restart npm run dev</li>
+                    <li><strong>Check Network Tab:</strong> Ensure HomePage.tsx is loading</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2>🔧 Manual Verification</h2>
+            <div class="code-block">
+// Check if admin section exists in DOM
+const adminSection = document.querySelector('section[class*="from-gray-900"]');
+console.log('Admin section found:', adminSection);
+
+// Check for admin buttons
+const adminLoginBtn = document.querySelector('a[href="/admin-login"]');
+const adminSignupBtn = document.querySelector('a[href="/admin-signup"]');
+console.log('Admin login button:', adminLoginBtn);
+console.log('Admin signup button:', adminSignupBtn);
+
+// Check for credentials box
+const credentialsBox = document.querySelector('div[class*="bg-purple-800"]');
+console.log('Credentials box:', credentialsBox);
+            </div>
+            <button class="btn-primary" onclick="runManualCheck()">🔍 Run Manual Check</button>
+        </div>
+
+        <div class="debug-section">
+            <h2>🚀 Alternative Access Methods</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button class="btn-primary" onclick="goDirectToAdminLogin()">🔐 Direct Admin Login</button>
+                <button class="btn-success" onclick="goDirectToAdminSignup()">📝 Direct Admin Signup</button>
+                <button class="btn-warning" onclick="testQuickAdminAccess()">⚡ Quick Admin Access</button>
+            </div>
+
+            <div class="success">
+                <h3>📍 Direct URLs:</h3>
+                <ul>
+                    <li><strong>Admin Login:</strong> http://localhost:5174/admin-login</li>
+                    <li><strong>Admin Signup:</strong> http://localhost:5174/admin-signup</li>
+                    <li><strong>Admin Dashboard:</strong> http://localhost:5174/admin-dashboard</li>
+                    <li><strong>User Management:</strong> http://localhost:5174/admin/users</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2>🔑 Admin Credentials</h2>
+            <div class="highlight">
+                <h3>🚀 Simple Access:</h3>
+                <div style="background: #1a1a2e; color: white; padding: 15px; border-radius: 8px; font-family: monospace;">
+                    <div style="color: #f39c12;">Username:</div>
+                    <div style="color: #2ecc71; font-weight: bold; margin-bottom: 10px;">admin</div>
+                    <div style="color: #f39c12;">Password:</div>
+                    <div style="color: #2ecc71; font-weight: bold;">admin123</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function checkHomePage() {
+            window.open('http://localhost:5174/', '_blank');
+            showOutput('🏠 Opening home page - Look for the dark admin section after the blue seller section!', 'info');
+        }
+
+        function checkAdminRoutes() {
+            showOutput('🔗 Checking admin routes:\n• /admin-login - Admin login page\n• /admin-signup - Admin signup page\n• /admin-dashboard - Admin dashboard\n• /admin/users - User management', 'info');
+        }
+
+        function inspectPageSource() {
+            showOutput('📄 To inspect page source:\n1. Right-click on home page\n2. Select "View Page Source"\n3. Search for "Admin Control Panel"\n4. Check if admin section HTML is present', 'info');
+        }
+
+        function runManualCheck() {
+            const checkScript = `
+// Open browser console and run this:
+const adminSection = document.querySelector('section[class*="from-gray-900"]');
+console.log('Admin section found:', adminSection);
+
+const adminLoginBtn = document.querySelector('a[href="/admin-login"]');
+const adminSignupBtn = document.querySelector('a[href="/admin-signup"]');
+console.log('Admin login button:', adminLoginBtn);
+console.log('Admin signup button:', adminSignupBtn);
+
+const credentialsBox = document.querySelector('div[class*="bg-purple-800"]');
+console.log('Credentials box:', credentialsBox);
+            `;
+            
+            navigator.clipboard.writeText(checkScript).then(() => {
+                showOutput('📋 Debug script copied to clipboard! Paste it in browser console on the home page.', 'success');
+            }).catch(() => {
+                showOutput('🔍 Manual check script:\n' + checkScript, 'info');
+            });
+        }
+
+        function goDirectToAdminLogin() {
+            window.open('http://localhost:5174/admin-login', '_blank');
+            showOutput('🔐 Opening admin login directly - Use admin/admin123 credentials!', 'success');
+        }
+
+        function goDirectToAdminSignup() {
+            window.open('http://localhost:5174/admin-signup', '_blank');
+            showOutput('📝 Opening admin signup directly - Demo credentials are shown!', 'success');
+        }
+
+        function testQuickAdminAccess() {
+            // Set admin credentials in localStorage
+            const adminAuth = {
+                state: {
+                    user: {
+                        id: "admin",
+                        name: "Super Admin",
+                        email: "admin@admin.platform.com",
+                        role: "SUPER_ADMIN",
+                        adminId: "admin",
+                        permissions: ["VIEW_DASHBOARD", "MANAGE_USERS", "MANAGE_PRODUCTS", "MANAGE_ORDERS", "MANAGE_FINANCES", "MANAGE_SETTINGS", "MANAGE_ADMINS"],
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-admin-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(adminAuth));
+            window.open('http://localhost:5174/admin-dashboard', '_blank');
+            showOutput('⚡ Quick admin access successful! Opening admin dashboard...', 'success');
+        }
+
+        function showOutput(message, type = 'info') {
+            const output = document.getElementById('output');
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : 'highlight';
+            output.innerHTML = `<div class="${className}">${message.replace(/\n/g, '<br>')}</div>`;
+        }
+
+        // Auto-setup on page load
+        window.onload = function() {
+            showOutput('🔍 Debug tool loaded! If you can\'t see the admin section on the home page, try the troubleshooting steps above.', 'info');
+        };
+    </script>
+</body>
+</html>

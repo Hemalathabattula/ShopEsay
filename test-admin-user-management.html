@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🛡️ Admin User Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; color: white; }
+        .test-section { background: white; padding: 25px; margin: 20px 0; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
+        .feature-card h4 { margin: 0 0 10px 0; color: #667eea; }
+        .highlight-box { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3; }
+        .success-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50; }
+        button { padding: 12px 24px; margin: 8px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        .demo-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .demo-table th, .demo-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .demo-table th { background: #f8f9fa; font-weight: 600; }
+        .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+        .status-active { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-suspended { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Admin User Management System</h1>
+            <p>Comprehensive admin interface for managing sellers and admin accounts</p>
+        </div>
+
+        <!-- System Overview -->
+        <div class="test-section">
+            <h2>🎯 System Overview</h2>
+            <div class="highlight-box">
+                <h3>🚀 New Admin User Management Features:</h3>
+                <ul>
+                    <li><strong>Unified Interface:</strong> Manage both sellers and admins in one place</li>
+                    <li><strong>Advanced Filtering:</strong> Search and filter by status, role, and more</li>
+                    <li><strong>Complete CRUD Operations:</strong> Create, Read, Update, Delete users</li>
+                    <li><strong>Role-based Permissions:</strong> Different access levels for different admin types</li>
+                    <li><strong>Detailed User Profiles:</strong> View comprehensive user information</li>
+                    <li><strong>Status Management:</strong> Activate, suspend, or manage user statuses</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Breakdown -->
+        <div class="test-section">
+            <h2>✨ Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏪 Seller Management</h4>
+                    <ul>
+                        <li>View all seller accounts</li>
+                        <li>Track store performance metrics</li>
+                        <li>Manage seller verification status</li>
+                        <li>Monitor sales and commission data</li>
+                        <li>Handle seller account suspension</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>👑 Admin Management</h4>
+                    <ul>
+                        <li>Manage admin accounts and roles</li>
+                        <li>Set granular permissions</li>
+                        <li>Track admin activity and login history</li>
+                        <li>Assign departments and responsibilities</li>
+                        <li>Create new admin accounts</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔍 Advanced Search & Filter</h4>
+                    <ul>
+                        <li>Search by name, email, or store name</li>
+                        <li>Filter by account status</li>
+                        <li>Sort by join date, activity, performance</li>
+                        <li>Export user data</li>
+                        <li>Bulk operations support</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📊 User Analytics</h4>
+                    <ul>
+                        <li>View user performance metrics</li>
+                        <li>Track login and activity patterns</li>
+                        <li>Monitor account verification status</li>
+                        <li>Generate user reports</li>
+                        <li>Analyze user growth trends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Data Preview -->
+        <div class="test-section">
+            <h2>📋 Sample Data Preview</h2>
+            
+            <h3>🏪 Sellers</h3>
+            <table class="demo-table">
+                <thead>
+                    <tr>
+                        <th>Seller Name</th>
+                        <th>Store Name</th>
+                        <th>Products</th>
+                        <th>Sales</th>
+                        <th>Status</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fashion Store Owner</td>
+                        <td>Fashion Era Store</td>
+                        <td>45</td>
+                        <td>$12,500</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>4.8/5</td>
+                    </tr>
+                    <tr>
+                        <td>Tech Hub Owner</td>
+                        <td>Tech Hub Store</td>
+                        <td>78</td>
+                        <td>$25,600</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>4.9/5</td>
+                    </tr>
+                    <tr>
+                        <td>Home Decor Owner</td>
+                        <td>Home Decor Plus</td>
+                        <td>32</td>
+                        <td>$8,900</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>4.6/5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>👑 Admins</h3>
+            <table class="demo-table">
+                <thead>
+                    <tr>
+                        <th>Admin Name</th>
+                        <th>Role</th>
+                        <th>Department</th>
+                        <th>Permissions</th>
+                        <th>Status</th>
+                        <th>Last Login</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Super Admin</td>
+                        <td>SUPER_ADMIN</td>
+                        <td>Administration</td>
+                        <td>7</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>2024-01-15</td>
+                    </tr>
+                    <tr>
+                        <td>Finance Admin</td>
+                        <td>FINANCE_ADMIN</td>
+                        <td>Finance</td>
+                        <td>4</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>2024-01-14</td>
+                    </tr>
+                    <tr>
+                        <td>Support Admin</td>
+                        <td>SUPPORT_ADMIN</td>
+                        <td>Customer Support</td>
+                        <td>2</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>2024-01-12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Access Instructions -->
+        <div class="test-section">
+            <h2>🚀 How to Access</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button class="btn-success" onclick="loginAsAdmin()">🛡️ Login as Admin</button>
+                <button class="btn-primary" onclick="goToAdminDashboard()">📊 Open Admin Dashboard</button>
+                <button class="btn-info" onclick="goToUserManagement()">👥 Open User Management</button>
+                <button class="btn-warning" onclick="testUserOperations()">🔧 Test Operations</button>
+            </div>
+
+            <div class="success-box">
+                <h3>📋 Access Steps:</h3>
+                <ol>
+                    <li><strong>Login as Admin:</strong> Use admin001 / Admin@123! (Super Admin)</li>
+                    <li><strong>Go to Admin Dashboard:</strong> Navigate to /admin-dashboard</li>
+                    <li><strong>Click "User Management":</strong> In the Quick Access section</li>
+                    <li><strong>Or Direct Access:</strong> Go to /admin/users</li>
+                    <li><strong>Test Features:</strong> View, edit, create, and manage users</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Technical Implementation -->
+        <div class="test-section">
+            <h2>⚙️ Technical Implementation</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏗️ Architecture</h4>
+                    <ul>
+                        <li><strong>AdminUserManagement.tsx:</strong> Main management interface</li>
+                        <li><strong>UserModal.tsx:</strong> Modal for CRUD operations</li>
+                        <li><strong>Protected Routes:</strong> Role-based access control</li>
+                        <li><strong>State Management:</strong> React hooks for data handling</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔐 Security Features</h4>
+                    <ul>
+                        <li><strong>Role Validation:</strong> Only SUPER_ADMIN can access</li>
+                        <li><strong>Protected Routes:</strong> Authentication required</li>
+                        <li><strong>Permission Checks:</strong> Granular access control</li>
+                        <li><strong>Secure Operations:</strong> Confirmation dialogs</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎨 UI/UX Features</h4>
+                    <ul>
+                        <li><strong>Responsive Design:</strong> Works on all devices</li>
+                        <li><strong>Interactive Tables:</strong> Sortable and filterable</li>
+                        <li><strong>Modal Interface:</strong> Smooth user experience</li>
+                        <li><strong>Status Indicators:</strong> Visual status badges</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📊 Data Management</h4>
+                    <ul>
+                        <li><strong>Mock Data:</strong> Comprehensive test dataset</li>
+                        <li><strong>CRUD Operations:</strong> Full data manipulation</li>
+                        <li><strong>Search & Filter:</strong> Advanced data querying</li>
+                        <li><strong>Export Ready:</strong> Data export functionality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function loginAsAdmin() {
+            const adminAuth = {
+                state: {
+                    user: {
+                        id: "admin001",
+                        name: "Super Admin",
+                        email: "admin001@admin.platform.com",
+                        role: "SUPER_ADMIN",
+                        adminId: "admin001",
+                        permissions: ["VIEW_DASHBOARD", "MANAGE_USERS", "MANAGE_PRODUCTS", "MANAGE_ORDERS", "MANAGE_FINANCES", "MANAGE_SETTINGS", "MANAGE_ADMINS"],
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-super-admin-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(adminAuth));
+            showOutput('✅ Logged in as Super Admin! You now have access to user management.', 'success');
+        }
+
+        function goToAdminDashboard() {
+            window.open('http://localhost:5174/admin-dashboard', '_blank');
+            showOutput('🚀 Opening Admin Dashboard...', 'info');
+        }
+
+        function goToUserManagement() {
+            window.open('http://localhost:5174/admin/users', '_blank');
+            showOutput('👥 Opening User Management interface...', 'info');
+        }
+
+        function testUserOperations() {
+            showOutput('🔧 User Management Operations Available:\n• View seller and admin details\n• Edit user information\n• Create new accounts\n• Change user status\n• Delete accounts\n• Search and filter users\n• Export user data', 'info');
+        }
+
+        function showOutput(message, type = 'info') {
+            const output = document.getElementById('output');
+            output.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Auto-setup on page load
+        window.onload = function() {
+            showOutput('🛡️ Admin User Management System Ready! Click the buttons above to test the functionality.', 'info');
+        };
+    </script>
+</body>
+</html>

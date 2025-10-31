@@ -1,0 +1,9 @@
+@echo off
+echo 🚀 Starting Fashion Era Robust Backend...
+echo.
+echo Stopping any existing Node.js processes...
+taskkill /f /im node.exe >nul 2>&1
+echo.
+echo Starting robust backend server...
+node robust-backend.cjs
+pause

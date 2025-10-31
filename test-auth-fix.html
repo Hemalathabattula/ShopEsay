@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔐 Authentication Fix Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .test-section { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .credentials-box { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-warning { background: #f59e0b; color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; border-left: 4px solid #3b82f6; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+        .login-form { display: grid; gap: 10px; max-width: 300px; margin: 20px auto; }
+        .login-form input { padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .login-form button { padding: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Authentication System Fix</h1>
+            <p>Testing the updated authentication with mock data fallback</p>
+        </div>
+
+        <!-- Issue Description -->
+        <div class="test-section">
+            <h2>❌ Issue Identified</h2>
+            <p><strong>Problem:</strong> 401 Unauthorized errors when trying to login</p>
+            <p><strong>Cause:</strong> Backend authentication routes were expecting database users but database might not be connected or populated</p>
+            <p><strong>Solution:</strong> Added mock data fallback for testing purposes</p>
+        </div>
+
+        <!-- Mock Credentials -->
+        <div class="test-section">
+            <h2>🧪 Test Credentials (Mock Data)</h2>
+            <div class="credentials-box">
+                <h3>👤 Customer Accounts:</h3>
+                <ul>
+                    <li><strong>Email:</strong> customer@example.com | <strong>Password:</strong> password123</li>
+                    <li><strong>Email:</strong> jane@example.com | <strong>Password:</strong> password123</li>
+                    <li><strong>Email:</strong> mike@example.com | <strong>Password:</strong> password123</li>
+                </ul>
+                
+                <h3>🏪 Seller Accounts:</h3>
+                <ul>
+                    <li><strong>Email:</strong> seller@example.com | <strong>Password:</strong> password123 | <strong>Store:</strong> Fashion Era Store</li>
+                    <li><strong>Email:</strong> tech@example.com | <strong>Password:</strong> password123 | <strong>Store:</strong> Tech Hub Store</li>
+                    <li><strong>Email:</strong> home@example.com | <strong>Password:</strong> password123 | <strong>Store:</strong> Home Decor Plus</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quick Login Tests -->
+        <div class="test-section">
+            <h2>⚡ Quick Login Tests</h2>
+            <div style="text-align: center;">
+                <button class="btn-primary" onclick="testCustomerLogin()">👤 Test Customer Login</button>
+                <button class="btn-success" onclick="testSellerLogin()">🏪 Test Seller Login</button>
+                <button class="btn-warning" onclick="testAdminLogin()">🛡️ Test Admin Login</button>
+                <button class="btn-danger" onclick="testInvalidLogin()">❌ Test Invalid Login</button>
+            </div>
+        </div>
+
+        <!-- Manual Login Form -->
+        <div class="test-section">
+            <h2>📝 Manual Login Test</h2>
+            <div class="login-form">
+                <input type="email" id="email" placeholder="Email" value="customer@example.com">
+                <input type="password" id="password" placeholder="Password" value="password123">
+                <select id="userType">
+                    <option value="customer">Customer</option>
+                    <option value="seller">Seller</option>
+                </select>
+                <button class="btn-primary" onclick="manualLogin()">🔐 Login</button>
+            </div>
+        </div>
+
+        <!-- Navigation Tests -->
+        <div class="test-section">
+            <h2>🧭 Dashboard Navigation Tests</h2>
+            <div style="text-align: center;">
+                <button class="btn-primary" onclick="goToCustomerDashboard()">👤 Customer Dashboard</button>
+                <button class="btn-success" onclick="goToSellerDashboard()">🏪 Seller Dashboard</button>
+                <button class="btn-warning" onclick="goToAdminDashboard()">🛡️ Admin Dashboard</button>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        async function testCustomerLogin() {
+            showOutput('🧪 Testing customer login...', 'info');
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'customer@example.com',
+                        password: 'password123'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showOutput(`✅ Customer login successful!\nUser: ${data.data.user.name}\nRole: ${data.data.user.role}\nToken: ${data.data.token.substring(0, 20)}...`, 'success');
+                    
+                    // Store auth data
+                    const authData = {
+                        state: {
+                            user: data.data.user,
+                            token: data.data.token,
+                            isAuthenticated: true
+                        },
+                        version: 0
+                    };
+                    localStorage.setItem('auth-storage', JSON.stringify(authData));
+                } else {
+                    showOutput(`❌ Customer login failed: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showOutput(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testSellerLogin() {
+            showOutput('🧪 Testing seller login...', 'info');
+            try {
+                const response = await fetch(`${API_BASE}/auth/seller/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'seller@example.com',
+                        password: 'password123'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showOutput(`✅ Seller login successful!\nUser: ${data.data.user.name}\nStore: ${data.data.user.storeName}\nRole: ${data.data.user.role}\nToken: ${data.data.token.substring(0, 20)}...`, 'success');
+                    
+                    // Store auth data
+                    const authData = {
+                        state: {
+                            user: data.data.user,
+                            token: data.data.token,
+                            isAuthenticated: true
+                        },
+                        version: 0
+                    };
+                    localStorage.setItem('auth-storage', JSON.stringify(authData));
+                } else {
+                    showOutput(`❌ Seller login failed: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showOutput(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAdminLogin() {
+            showOutput('🧪 Testing admin login (using frontend auth)...', 'info');
+            
+            // Admin login uses different system
+            const adminAuth = {
+                state: {
+                    user: {
+                        id: "admin001",
+                        name: "Super Admin",
+                        email: "admin001@admin.platform.com",
+                        role: "SUPER_ADMIN",
+                        adminId: "admin001",
+                        permissions: ["VIEW_DASHBOARD", "MANAGE_USERS", "MANAGE_PRODUCTS", "MANAGE_ORDERS", "MANAGE_FINANCES", "MANAGE_SETTINGS", "MANAGE_ADMINS"],
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-super-admin-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(adminAuth));
+            showOutput('✅ Admin login successful (mock)!\nUser: Super Admin\nRole: SUPER_ADMIN\nPermissions: Full Access', 'success');
+        }
+
+        async function testInvalidLogin() {
+            showOutput('🧪 Testing invalid login...', 'info');
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'invalid@example.com',
+                        password: 'wrongpassword'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    showOutput(`✅ Invalid login correctly rejected: ${data.message}`, 'success');
+                } else {
+                    showOutput(`❌ Invalid login should have failed!`, 'error');
+                }
+            } catch (error) {
+                showOutput(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function manualLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('userType').value;
+            
+            showOutput(`🧪 Testing ${userType} login with ${email}...`, 'info');
+            
+            const endpoint = userType === 'seller' ? '/auth/seller/login' : '/auth/login';
+            
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showOutput(`✅ ${userType} login successful!\nUser: ${data.data.user.name}\nRole: ${data.data.user.role}${data.data.user.storeName ? '\nStore: ' + data.data.user.storeName : ''}`, 'success');
+                    
+                    // Store auth data
+                    const authData = {
+                        state: {
+                            user: data.data.user,
+                            token: data.data.token,
+                            isAuthenticated: true
+                        },
+                        version: 0
+                    };
+                    localStorage.setItem('auth-storage', JSON.stringify(authData));
+                } else {
+                    showOutput(`❌ ${userType} login failed: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showOutput(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function goToCustomerDashboard() {
+            window.open('http://localhost:5174/customer-dashboard', '_blank');
+            showOutput('🚀 Opening Customer Dashboard...', 'info');
+        }
+
+        function goToSellerDashboard() {
+            window.open('http://localhost:5174/seller-dashboard', '_blank');
+            showOutput('🚀 Opening Seller Dashboard...', 'info');
+        }
+
+        function goToAdminDashboard() {
+            window.open('http://localhost:5174/admin-dashboard', '_blank');
+            showOutput('🚀 Opening Admin Dashboard...', 'info');
+        }
+
+        function showOutput(message, type = 'info') {
+            const output = document.getElementById('output');
+            output.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Check if server is running
+        window.onload = async function() {
+            try {
+                const response = await fetch(`${API_BASE}/auth/health`);
+                if (response.ok) {
+                    showOutput('✅ Backend server is running and accessible!', 'success');
+                } else {
+                    showOutput('⚠️ Backend server responded but may have issues', 'warning');
+                }
+            } catch (error) {
+                showOutput('❌ Cannot connect to backend server. Make sure it\'s running on http://localhost:5000', 'error');
+            }
+        };
+    </script>
+</body>
+</html>

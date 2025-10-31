@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🤖 Smart Chatbot Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .test-section { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .chat-demo { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; }
+        .user-message { background: #007bff; color: white; padding: 8px 12px; border-radius: 15px; margin: 5px 0; display: inline-block; }
+        .bot-message { background: #e9ecef; color: #333; padding: 8px 12px; border-radius: 15px; margin: 5px 0; display: inline-block; white-space: pre-line; }
+        button { padding: 8px 16px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; background: #007bff; color: white; }
+        button:hover { background: #0056b3; }
+        .test-button { background: #28a745; }
+        .test-button:hover { background: #1e7e34; }
+        .example-queries { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+        .query-card { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #007bff; }
+        .query-card h4 { margin: 0 0 10px 0; color: #007bff; }
+        .query-card p { margin: 5px 0; font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Smart Chatbot Testing</h1>
+            <p>Test the improved AI assistant with intelligent responses</p>
+        </div>
+
+        <!-- Setup Section -->
+        <div class="test-section">
+            <h2>🔧 Setup</h2>
+            <button onclick="loginAsCustomer()">Login as Customer</button>
+            <button onclick="goToChatDashboard()">Open Chat Dashboard</button>
+            <button onclick="testFloatingChat()">Test Floating Chat</button>
+        </div>
+
+        <!-- Example Queries -->
+        <div class="test-section">
+            <h2>💬 Test These Smart Queries</h2>
+            <div class="example-queries">
+                <div class="query-card">
+                    <h4>🛍️ Product Search</h4>
+                    <p><strong>Try:</strong> "show me products under $50"</p>
+                    <p><strong>Try:</strong> "find cheap clothes"</p>
+                    <p><strong>Try:</strong> "electronics under $100"</p>
+                    <button class="test-button" onclick="testQuery('show me products under $50')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>📦 Order Tracking</h4>
+                    <p><strong>Try:</strong> "track my order"</p>
+                    <p><strong>Try:</strong> "when will my delivery arrive"</p>
+                    <p><strong>Try:</strong> "order status"</p>
+                    <button class="test-button" onclick="testQuery('track my order')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>💳 Payment Help</h4>
+                    <p><strong>Try:</strong> "refund my order"</p>
+                    <p><strong>Try:</strong> "payment failed"</p>
+                    <p><strong>Try:</strong> "billing issues"</p>
+                    <button class="test-button" onclick="testQuery('refund my order')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>🏪 Seller Support</h4>
+                    <p><strong>Try:</strong> "how to become a seller"</p>
+                    <p><strong>Try:</strong> "manage my store"</p>
+                    <p><strong>Try:</strong> "business analytics"</p>
+                    <button class="test-button" onclick="testQuery('how to become a seller')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>👕 Fashion & Style</h4>
+                    <p><strong>Try:</strong> "show me dresses"</p>
+                    <p><strong>Try:</strong> "size guide for shirts"</p>
+                    <p><strong>Try:</strong> "red color options"</p>
+                    <button class="test-button" onclick="testQuery('show me dresses')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>🚚 Shipping Info</h4>
+                    <p><strong>Try:</strong> "shipping options"</p>
+                    <p><strong>Try:</strong> "delivery time"</p>
+                    <p><strong>Try:</strong> "free shipping"</p>
+                    <button class="test-button" onclick="testQuery('shipping options')">Test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Chat Demo -->
+        <div class="test-section">
+            <h2>🎯 Live Chat Demo</h2>
+            <div id="chatDemo" class="chat-demo">
+                <p><strong>Chat with the AI Assistant:</strong></p>
+                <input type="text" id="userInput" placeholder="Type your message..." style="width: 70%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <button onclick="sendTestMessage()" style="width: 25%;">Send</button>
+                <div id="chatMessages" style="margin-top: 15px; max-height: 300px; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <!-- Response Examples -->
+        <div class="test-section">
+            <h2>✨ Expected Smart Responses</h2>
+            <div id="responseExamples">
+                <div class="chat-demo">
+                    <div class="user-message">show me products under $50</div>
+                    <div class="bot-message">🛍️ Here are some great products under $50:
+
+• Fashion T-Shirts - $25-35
+• Accessories & Jewelry - $15-45
+• Home Decor Items - $20-49
+• Books & Stationery - $10-30
+
+Would you like me to show you specific categories or help you find something particular?</div>
+                </div>
+
+                <div class="chat-demo">
+                    <div class="user-message">track my order</div>
+                    <div class="bot-message">📦 I can help you track your orders!
+
+• Go to 'My Orders' in your dashboard
+• Use your order number to get real-time updates
+• Check delivery status and estimated arrival
+
+Do you have a specific order number you'd like me to help you track?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loginAsCustomer() {
+            const customerAuth = {
+                state: {
+                    user: {
+                        id: "customer123",
+                        name: "John Customer",
+                        email: "customer@example.com",
+                        role: "CUSTOMER",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-customer-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(customerAuth));
+            alert('✅ Logged in as Customer! You can now test the smart chatbot.');
+        }
+
+        function goToChatDashboard() {
+            window.open('http://localhost:5174/customer-dashboard?tab=messages', '_blank');
+        }
+
+        function testFloatingChat() {
+            window.open('http://localhost:5174/', '_blank');
+            alert('💬 Look for the floating chat button in the bottom-right corner!');
+        }
+
+        function testQuery(query) {
+            const response = getSmartBotResponse(query);
+            showChatDemo(query, response);
+        }
+
+        function sendTestMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (message) {
+                const response = getSmartBotResponse(message);
+                addChatMessage(message, response);
+                input.value = '';
+            }
+        }
+
+        function getSmartBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Product-related queries
+            if (lowerMessage.includes('product') && (lowerMessage.includes('under') || lowerMessage.includes('below') || lowerMessage.includes('<') || lowerMessage.includes('less'))) {
+                if (lowerMessage.includes('50') || lowerMessage.includes('$50')) {
+                    return "🛍️ Here are some great products under $50:\n\n• Fashion T-Shirts - $25-35\n• Accessories & Jewelry - $15-45\n• Home Decor Items - $20-49\n• Books & Stationery - $10-30\n\nWould you like me to show you specific categories or help you find something particular?";
+                }
+            }
+            // Order tracking
+            else if (lowerMessage.includes('order') || lowerMessage.includes('track') || lowerMessage.includes('delivery')) {
+                return "📦 I can help you track your orders!\n\n• Go to 'My Orders' in your dashboard\n• Use your order number to get real-time updates\n• Check delivery status and estimated arrival\n\nDo you have a specific order number you'd like me to help you track?";
+            }
+            // Payment and refunds
+            else if (lowerMessage.includes('payment') || lowerMessage.includes('refund') || lowerMessage.includes('money') || lowerMessage.includes('pay')) {
+                return "💳 For payment and refund assistance:\n\n• Payment issues: Check your payment methods in settings\n• Refund requests: Go to 'My Orders' → Select order → Request refund\n• Payment failed: Try a different payment method\n\nWould you like me to connect you with our payment support team?";
+            }
+            // Seller-related queries
+            else if (lowerMessage.includes('seller') || lowerMessage.includes('store') || lowerMessage.includes('business')) {
+                return "🏪 Seller & Business Support:\n\n• Become a seller: Click 'Sell on our platform'\n• Manage your store: Use the Seller Dashboard\n• Business analytics: Check your performance metrics\n• Customer support: Use B2C chat features\n\nAre you looking to start selling or need help with your existing store?";
+            }
+            // Fashion queries
+            else if (lowerMessage.includes('clothes') || lowerMessage.includes('fashion') || lowerMessage.includes('shirt') || lowerMessage.includes('dress')) {
+                return "👕 Fashion & Clothing:\n\n• Men's clothing: Shirts, pants, jackets\n• Women's fashion: Dresses, tops, accessories\n• Kids clothing: All ages and sizes\n• Seasonal collections: Latest trends\n\nWhat type of clothing are you looking for? I can help you find the perfect style and size!";
+            }
+            // Shipping queries
+            else if (lowerMessage.includes('ship') || lowerMessage.includes('deliver') || lowerMessage.includes('when will')) {
+                return "🚚 Shipping & Delivery Information:\n\n• Standard shipping: 3-5 business days\n• Express shipping: 1-2 business days\n• Free shipping: Orders over $50\n• International: 7-14 business days\n\nYou can track your shipment in 'My Orders' section. Need help with a specific delivery?";
+            }
+            // Default response
+            else {
+                return "I understand you're looking for assistance. Could you please provide more details about what you need help with?\n\nI can help with:\n• Product searches and recommendations\n• Order tracking and delivery\n• Payment and refund issues\n• Seller support and business questions\n• Account and profile management";
+            }
+        }
+
+        function showChatDemo(userMessage, botResponse) {
+            const demo = document.createElement('div');
+            demo.className = 'chat-demo';
+            demo.innerHTML = `
+                <div class="user-message">${userMessage}</div>
+                <div class="bot-message">${botResponse}</div>
+            `;
+            document.getElementById('responseExamples').appendChild(demo);
+        }
+
+        function addChatMessage(userMessage, botResponse) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `
+                <div class="user-message" style="text-align: right; margin: 5px 0;">${userMessage}</div>
+                <div class="bot-message" style="text-align: left; margin: 5px 0;">${botResponse}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Allow Enter key to send message
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('userInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendTestMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

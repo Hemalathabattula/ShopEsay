@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Wishlist</title>
+</head>
+<body>
+    <h1>Wishlist Debug</h1>
+    <button onclick="checkLocalStorage()">Check Local Storage</button>
+    <button onclick="clearWishlist()">Clear Wishlist</button>
+    <div id="output"></div>
+
+    <script>
+        function checkLocalStorage() {
+            const output = document.getElementById('output');
+            const wishlistData = localStorage.getItem('wishlist-storage');
+            
+            output.innerHTML = '<h2>Local Storage Data:</h2>';
+            
+            if (wishlistData) {
+                try {
+                    const parsed = JSON.parse(wishlistData);
+                    output.innerHTML += '<pre>' + JSON.stringify(parsed, null, 2) + '</pre>';
+                } catch (e) {
+                    output.innerHTML += '<p>Error parsing wishlist data: ' + e.message + '</p>';
+                }
+            } else {
+                output.innerHTML += '<p>No wishlist data found in local storage</p>';
+            }
+            
+            // Also check auth data
+            const authData = localStorage.getItem('auth-storage');
+            if (authData) {
+                try {
+                    const parsed = JSON.parse(authData);
+                    output.innerHTML += '<h2>Auth Data:</h2>';
+                    output.innerHTML += '<pre>' + JSON.stringify(parsed, null, 2) + '</pre>';
+                } catch (e) {
+                    output.innerHTML += '<p>Error parsing auth data: ' + e.message + '</p>';
+                }
+            }
+        }
+        
+        function clearWishlist() {
+            localStorage.removeItem('wishlist-storage');
+            document.getElementById('output').innerHTML = '<p>Wishlist cleared!</p>';
+        }
+    </script>
+</body>
+</html>

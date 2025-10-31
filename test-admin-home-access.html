@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🏠 Admin Home Page Access</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; color: white; }
+        .test-section { background: white; padding: 25px; margin: 20px 0; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
+        .feature-card h4 { margin: 0 0 10px 0; color: #667eea; }
+        .highlight-box { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3; }
+        .success-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50; }
+        .credentials-box { background: #1a1a2e; color: #16213e; padding: 20px; border-radius: 10px; margin: 15px 0; border: 2px solid #0f3460; }
+        .credentials-box h3 { color: #e94560; margin-bottom: 15px; }
+        .credential-item { background: #16213e; padding: 10px; border-radius: 5px; margin: 8px 0; font-family: monospace; }
+        .credential-label { color: #f39c12; }
+        .credential-value { color: #2ecc71; font-weight: bold; }
+        button { padding: 12px 24px; margin: 8px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .btn-purple { background: #6f42c1; color: white; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .before, .after { padding: 15px; border-radius: 8px; }
+        .before { background: #ffebee; border-left: 4px solid #f44336; }
+        .after { background: #e8f5e9; border-left: 4px solid #4caf50; }
+        .demo-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Admin Home Page Access</h1>
+            <p>Easy admin access directly from the home page</p>
+        </div>
+
+        <!-- Implementation Overview -->
+        <div class="test-section">
+            <h2>✅ What Was Added</h2>
+            <div class="success-box">
+                <h3>🎯 New Admin Section on Home Page:</h3>
+                <ul>
+                    <li><strong>Admin Control Panel Section:</strong> Dedicated section showcasing admin features</li>
+                    <li><strong>Simple Credentials Display:</strong> Clear username/password shown on home page</li>
+                    <li><strong>Direct Access Links:</strong> Admin Login and Admin Signup buttons</li>
+                    <li><strong>Feature Highlights:</strong> User Management, Analytics, Security, Settings</li>
+                    <li><strong>Visual Design:</strong> Dark theme with purple accents for admin section</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Simple Credentials -->
+        <div class="test-section">
+            <h2>🔑 Simple Admin Credentials</h2>
+            <div class="credentials-box">
+                <h3>🚀 Quick Access Credentials</h3>
+                <div class="credential-item">
+                    <span class="credential-label">Username:</span> 
+                    <span class="credential-value">admin</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-label">Password:</span> 
+                    <span class="credential-value">admin123</span>
+                </div>
+                <p style="color: #f39c12; margin-top: 15px; font-size: 14px;">
+                    These credentials are displayed on both the home page and login page for easy access.
+                </p>
+            </div>
+        </div>
+
+        <!-- Before vs After -->
+        <div class="test-section">
+            <h2>🔄 Before vs After</h2>
+            <div class="before-after">
+                <div class="before">
+                    <h3>❌ Before</h3>
+                    <ul>
+                        <li>No admin access from home page</li>
+                        <li>Complex admin credentials</li>
+                        <li>Hidden admin functionality</li>
+                        <li>Difficult to find admin login</li>
+                        <li>No credential guidance</li>
+                    </ul>
+                </div>
+                <div class="after">
+                    <h3>✅ After</h3>
+                    <ul>
+                        <li>Prominent admin section on home page</li>
+                        <li>Simple admin/admin123 credentials</li>
+                        <li>Clear admin feature showcase</li>
+                        <li>Direct login/signup buttons</li>
+                        <li>Credentials displayed everywhere</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Page Features -->
+        <div class="test-section">
+            <h2>🏠 New Home Page Admin Section</h2>
+            <div class="demo-section">
+                <h3>🎨 Admin Control Panel Section Preview</h3>
+                <div class="feature-grid">
+                    <div class="feature-card" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                        <h4 style="color: #f39c12;">👥 User Management</h4>
+                        <p style="color: #ecf0f1;">Manage sellers and admin accounts</p>
+                    </div>
+                    <div class="feature-card" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                        <h4 style="color: #f39c12;">📊 Analytics Dashboard</h4>
+                        <p style="color: #ecf0f1;">Comprehensive platform analytics</p>
+                    </div>
+                    <div class="feature-card" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                        <h4 style="color: #f39c12;">🔒 Security Controls</h4>
+                        <p style="color: #ecf0f1;">Advanced security management</p>
+                    </div>
+                    <div class="feature-card" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                        <h4 style="color: #f39c12;">⚙️ System Settings</h4>
+                        <p style="color: #ecf0f1;">Platform configuration tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Access Flow -->
+        <div class="test-section">
+            <h2>🚀 How to Access Admin</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button class="btn-primary" onclick="goToHomePage()">🏠 View Home Page</button>
+                <button class="btn-purple" onclick="goToAdminLogin()">🔐 Admin Login</button>
+                <button class="btn-info" onclick="goToAdminSignup()">📝 Admin Signup</button>
+                <button class="btn-success" onclick="testQuickLogin()">⚡ Quick Login</button>
+            </div>
+
+            <div class="highlight-box">
+                <h3>📋 Access Steps:</h3>
+                <ol>
+                    <li><strong>Go to Home Page:</strong> Visit the main website</li>
+                    <li><strong>Scroll to Admin Section:</strong> Find the dark admin control panel section</li>
+                    <li><strong>See Credentials:</strong> Username: admin, Password: admin123</li>
+                    <li><strong>Click Admin Login:</strong> Purple button in the admin section</li>
+                    <li><strong>Use Credentials:</strong> Enter admin/admin123 and login</li>
+                    <li><strong>Access Dashboard:</strong> Full admin functionality available</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Updated Features -->
+        <div class="test-section">
+            <h2>🆕 Updated Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏠 Home Page Integration</h4>
+                    <ul>
+                        <li>New admin section after seller section</li>
+                        <li>Dark theme with purple accents</li>
+                        <li>Feature highlights and benefits</li>
+                        <li>Credential display box</li>
+                        <li>Direct access buttons</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔐 Simple Authentication</h4>
+                    <ul>
+                        <li>Added admin/admin123 credentials</li>
+                        <li>Maintains existing complex credentials</li>
+                        <li>Updated login page with quick access</li>
+                        <li>Added demo credentials to signup</li>
+                        <li>Clear credential guidance</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎨 Visual Design</h4>
+                    <ul>
+                        <li>Consistent with existing design</li>
+                        <li>Purple/dark theme for admin</li>
+                        <li>Professional admin imagery</li>
+                        <li>Clear call-to-action buttons</li>
+                        <li>Responsive layout</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📱 User Experience</h4>
+                    <ul>
+                        <li>Easy discovery from home page</li>
+                        <li>No need to remember complex URLs</li>
+                        <li>Credentials always visible</li>
+                        <li>Quick access workflow</li>
+                        <li>Clear admin branding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Implementation -->
+        <div class="test-section">
+            <h2>⚙️ Technical Changes</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏠 HomePage.tsx Updates</h4>
+                    <ul>
+                        <li>Added new admin section after seller section</li>
+                        <li>Imported Crown, Users, Settings, BarChart3 icons</li>
+                        <li>Created credential display component</li>
+                        <li>Added admin login/signup links</li>
+                        <li>Responsive grid layout</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔐 AdminLogin.tsx Updates</h4>
+                    <ul>
+                        <li>Added admin/admin123 to valid credentials</li>
+                        <li>Updated demo credentials display</li>
+                        <li>Highlighted quick access option</li>
+                        <li>Maintained existing complex credentials</li>
+                        <li>Enhanced credential visibility</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📝 AdminSignup.tsx Updates</h4>
+                    <ul>
+                        <li>Added demo access notice</li>
+                        <li>Displayed simple credentials</li>
+                        <li>Added direct login link</li>
+                        <li>Green theme for demo section</li>
+                        <li>Clear testing instructions</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎯 User Flow</h4>
+                    <ul>
+                        <li>Home → Admin Section → Login</li>
+                        <li>Credentials visible at each step</li>
+                        <li>No complex navigation required</li>
+                        <li>Consistent admin branding</li>
+                        <li>Multiple access points</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function goToHomePage() {
+            window.open('http://localhost:5174/', '_blank');
+            showOutput('🏠 Opening Home Page - Look for the Admin Control Panel section!', 'info');
+        }
+
+        function goToAdminLogin() {
+            window.open('http://localhost:5174/admin-login', '_blank');
+            showOutput('🔐 Opening Admin Login - Use admin/admin123 credentials!', 'info');
+        }
+
+        function goToAdminSignup() {
+            window.open('http://localhost:5174/admin-signup', '_blank');
+            showOutput('📝 Opening Admin Signup - Demo credentials are displayed!', 'info');
+        }
+
+        function testQuickLogin() {
+            // Set admin credentials in localStorage
+            const adminAuth = {
+                state: {
+                    user: {
+                        id: "admin",
+                        name: "Super Admin",
+                        email: "admin@admin.platform.com",
+                        role: "SUPER_ADMIN",
+                        adminId: "admin",
+                        permissions: ["VIEW_DASHBOARD", "MANAGE_USERS", "MANAGE_PRODUCTS", "MANAGE_ORDERS", "MANAGE_FINANCES", "MANAGE_SETTINGS", "MANAGE_ADMINS"],
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-admin-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(adminAuth));
+            
+            // Open admin dashboard
+            window.open('http://localhost:5174/admin-dashboard', '_blank');
+            showOutput('⚡ Quick login successful! Opening admin dashboard...', 'success');
+        }
+
+        function showOutput(message, type = 'info') {
+            const output = document.getElementById('output');
+            output.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Auto-setup on page load
+        window.onload = function() {
+            showOutput('🏠 Admin Home Page Access Test Ready! The admin section is now visible on the home page with simple credentials.', 'info');
+        };
+    </script>
+</body>
+</html>

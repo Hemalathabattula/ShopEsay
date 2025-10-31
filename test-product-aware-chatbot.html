@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🛍️ Product-Aware Chatbot Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .test-section { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .chat-demo { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; }
+        .user-message { background: #007bff; color: white; padding: 8px 12px; border-radius: 15px; margin: 5px 0; display: inline-block; max-width: 70%; }
+        .bot-message { background: #e9ecef; color: #333; padding: 8px 12px; border-radius: 15px; margin: 5px 0; display: inline-block; white-space: pre-line; max-width: 80%; }
+        button { padding: 8px 16px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; background: #007bff; color: white; }
+        button:hover { background: #0056b3; }
+        .test-button { background: #28a745; }
+        .test-button:hover { background: #1e7e34; }
+        .query-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0; }
+        .query-card { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #007bff; }
+        .query-card h4 { margin: 0 0 10px 0; color: #007bff; }
+        .query-card p { margin: 5px 0; font-size: 14px; color: #666; }
+        .product-info { background: #e8f5e8; padding: 10px; border-radius: 5px; margin: 10px 0; }
+        .live-chat { background: white; border: 1px solid #ddd; border-radius: 8px; height: 400px; display: flex; flex-direction: column; }
+        .chat-header { background: #007bff; color: white; padding: 10px; border-radius: 8px 8px 0 0; }
+        .chat-messages { flex: 1; padding: 10px; overflow-y: auto; }
+        .chat-input { display: flex; padding: 10px; border-top: 1px solid #ddd; }
+        .chat-input input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛍️ Product-Aware AI Chatbot</h1>
+            <p>Smart chatbot that knows about actual products on your website</p>
+        </div>
+
+        <!-- Setup Section -->
+        <div class="test-section">
+            <h2>🔧 Setup & Navigation</h2>
+            <button onclick="setupTestData()">📦 Setup Test Products</button>
+            <button onclick="loginAsCustomer()">👤 Login as Customer</button>
+            <button onclick="goToChatDashboard()">💬 Open Chat Dashboard</button>
+            <button onclick="checkProductData()">🔍 Check Product Data</button>
+        </div>
+
+        <!-- Product Information -->
+        <div class="test-section">
+            <h2>📋 Available Products (Test Data)</h2>
+            <div class="product-info">
+                <strong>Our chatbot now knows about these actual products:</strong><br>
+                • Premium Cotton T-Shirt - $29.99 (Fashion)<br>
+                • Wireless Bluetooth Headphones - $79.99 (Electronics)<br>
+                • Leather Handbag - $149.99 (Accessories)<br>
+                • Smart Fitness Watch - $199.99 (Electronics)<br>
+                • Organic Coffee Beans - $24.99 (Food)<br>
+                • Yoga Mat - $39.99 (Sports)<br>
+                • Ceramic Dinner Set - $89.99 (Home)<br>
+                • Running Shoes - $119.99 (Sports)
+            </div>
+        </div>
+
+        <!-- Smart Query Tests -->
+        <div class="test-section">
+            <h2>🎯 Test Product-Aware Queries</h2>
+            <div class="query-grid">
+                <div class="query-card">
+                    <h4>💰 Price-Based Search</h4>
+                    <p><strong>Try:</strong> "show me products under $50"</p>
+                    <p><strong>Try:</strong> "what's the cheapest product"</p>
+                    <p><strong>Try:</strong> "most expensive items"</p>
+                    <button class="test-button" onclick="testQuery('show me products under $50')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>📂 Category Exploration</h4>
+                    <p><strong>Try:</strong> "what categories do you have"</p>
+                    <p><strong>Try:</strong> "show me electronics"</p>
+                    <p><strong>Try:</strong> "fashion items available"</p>
+                    <button class="test-button" onclick="testQuery('what categories do you have')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>🔍 Product Search</h4>
+                    <p><strong>Try:</strong> "find headphones"</p>
+                    <p><strong>Try:</strong> "search for coffee"</p>
+                    <p><strong>Try:</strong> "looking for yoga equipment"</p>
+                    <button class="test-button" onclick="testQuery('find headphones')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>📦 Inventory Queries</h4>
+                    <p><strong>Try:</strong> "show all products"</p>
+                    <p><strong>Try:</strong> "what's in stock"</p>
+                    <p><strong>Try:</strong> "product details"</p>
+                    <button class="test-button" onclick="testQuery('show all products')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>🏃‍♂️ Sports & Fitness</h4>
+                    <p><strong>Try:</strong> "sports equipment"</p>
+                    <p><strong>Try:</strong> "fitness products"</p>
+                    <p><strong>Try:</strong> "running gear"</p>
+                    <button class="test-button" onclick="testQuery('sports equipment')">Test</button>
+                </div>
+
+                <div class="query-card">
+                    <h4>🏠 Home & Lifestyle</h4>
+                    <p><strong>Try:</strong> "home products"</p>
+                    <p><strong>Try:</strong> "kitchen items"</p>
+                    <p><strong>Try:</strong> "dinner set"</p>
+                    <button class="test-button" onclick="testQuery('home products')">Test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Chat Interface -->
+        <div class="test-section">
+            <h2>💬 Live Product-Aware Chat</h2>
+            <div class="live-chat">
+                <div class="chat-header">
+                    <strong>🤖 AI Shopping Assistant</strong> - Ask about our products!
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="bot-message">Hello! I'm your AI shopping assistant. I know about all our products and can help you find exactly what you're looking for. Try asking me about products under a certain price, specific categories, or search for something specific!</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Ask about our products..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expected Responses -->
+        <div class="test-section">
+            <h2>✨ Smart Response Examples</h2>
+            <div id="responseExamples">
+                <div class="chat-demo">
+                    <div class="user-message">show me products under $50</div>
+                    <div class="bot-message">🛍️ Here are 4 products under $50 available on our website:
+
+• Premium Cotton T-Shirt - $29.99
+• Organic Coffee Beans - $24.99
+• Yoga Mat - $39.99
+
+Would you like to see more details about any of these products?</div>
+                </div>
+
+                <div class="chat-demo">
+                    <div class="user-message">what categories do you have</div>
+                    <div class="bot-message">📋 Here are all product categories available on our website:
+
+• Fashion: 1 products (avg $29.99)
+• Electronics: 2 products (avg $139.99)
+• Accessories: 1 products (avg $149.99)
+• Food: 1 products (avg $24.99)
+• Sports: 2 products (avg $79.99)
+• Home: 1 products (avg $89.99)
+
+Total: 8 products across 6 categories
+
+Which category would you like to explore?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock product data for testing
+        const testProducts = [
+            { id: 1, name: "Premium Cotton T-Shirt", price: 29.99, category: "Fashion", description: "Comfortable cotton t-shirt" },
+            { id: 2, name: "Wireless Bluetooth Headphones", price: 79.99, category: "Electronics", description: "High-quality audio experience" },
+            { id: 3, name: "Leather Handbag", price: 149.99, category: "Accessories", description: "Stylish leather handbag" },
+            { id: 4, name: "Smart Fitness Watch", price: 199.99, category: "Electronics", description: "Track your fitness goals" },
+            { id: 5, name: "Organic Coffee Beans", price: 24.99, category: "Food", description: "Premium organic coffee" },
+            { id: 6, name: "Yoga Mat", price: 39.99, category: "Sports", description: "Non-slip yoga mat" },
+            { id: 7, name: "Ceramic Dinner Set", price: 89.99, category: "Home", description: "Beautiful ceramic dinnerware" },
+            { id: 8, name: "Running Shoes", price: 119.99, category: "Sports", description: "Comfortable running shoes" }
+        ];
+
+        function setupTestData() {
+            // Setup product store data
+            const productStore = {
+                state: { products: testProducts },
+                version: 0
+            };
+            localStorage.setItem('product-storage', JSON.stringify(productStore));
+            alert('✅ Test products loaded! The chatbot now knows about 8 real products.');
+        }
+
+        function loginAsCustomer() {
+            const customerAuth = {
+                state: {
+                    user: {
+                        id: "customer123",
+                        name: "John Customer",
+                        email: "customer@example.com",
+                        role: "CUSTOMER",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-customer-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(customerAuth));
+            alert('✅ Logged in as Customer!');
+        }
+
+        function goToChatDashboard() {
+            window.open('http://localhost:5174/customer-dashboard?tab=messages', '_blank');
+        }
+
+        function checkProductData() {
+            const productStore = localStorage.getItem('product-storage');
+            if (productStore) {
+                const parsed = JSON.parse(productStore);
+                const products = parsed.state?.products || [];
+                alert(`📦 Found ${products.length} products in store:\n${products.map(p => `• ${p.name} - $${p.price}`).join('\n')}`);
+            } else {
+                alert('❌ No product data found. Click "Setup Test Products" first.');
+            }
+        }
+
+        function testQuery(query) {
+            const response = getSmartBotResponse(query);
+            showChatDemo(query, response);
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (message) {
+                const response = getSmartBotResponse(message);
+                addChatMessage(message, response);
+                input.value = '';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function getSmartBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Get products from localStorage
+            const productStore = localStorage.getItem('product-storage');
+            let products = testProducts; // fallback
+            if (productStore) {
+                const parsed = JSON.parse(productStore);
+                products = parsed.state?.products || testProducts;
+            }
+
+            // Helper functions
+            const filterProductsByPrice = (maxPrice) => {
+                return products.filter(product => product.price <= maxPrice);
+            };
+
+            const getProductCategories = () => {
+                return [...new Set(products.map(p => p.category))];
+            };
+
+            const formatProductList = (productList, limit = 5) => {
+                return productList.slice(0, limit).map(product => 
+                    `• ${product.name} - $${product.price.toFixed(2)}`
+                ).join('\n');
+            };
+
+            // Product queries with real data
+            if (lowerMessage.includes('product') && (lowerMessage.includes('under') || lowerMessage.includes('below'))) {
+                if (lowerMessage.includes('50')) {
+                    const affordableProducts = filterProductsByPrice(50);
+                    return `🛍️ Here are ${affordableProducts.length} products under $50 available on our website:\n\n${formatProductList(affordableProducts)}\n\nWould you like to see more details about any of these products?`;
+                } else if (lowerMessage.includes('100')) {
+                    const midRangeProducts = filterProductsByPrice(100);
+                    return `🛍️ Here are ${midRangeProducts.length} products under $100:\n\n${formatProductList(midRangeProducts)}\n\nWhat type of product interests you most?`;
+                }
+            }
+            else if (lowerMessage.includes('categories') || lowerMessage.includes('what do you have')) {
+                const categories = getProductCategories();
+                const categoryStats = categories.map(category => {
+                    const categoryProducts = products.filter(p => p.category === category);
+                    const avgPrice = categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length;
+                    return `• ${category}: ${categoryProducts.length} products (avg $${avgPrice.toFixed(2)})`;
+                }).join('\n');
+                
+                return `📋 Here are all product categories available on our website:\n\n${categoryStats}\n\nTotal: ${products.length} products across ${categories.length} categories\n\nWhich category would you like to explore?`;
+            }
+            else if (lowerMessage.includes('show all') || lowerMessage.includes('all products')) {
+                return `🛍️ Our Complete Product Catalog (${products.length} items):\n\n${formatProductList(products, 8)}\n\nCategories: ${getProductCategories().join(', ')}\n\nWould you like to filter by category or price range?`;
+            }
+            else if (lowerMessage.includes('electronics') || lowerMessage.includes('headphones') || lowerMessage.includes('watch')) {
+                const electronicsProducts = products.filter(p => 
+                    p.category.toLowerCase().includes('electronics') || 
+                    p.name.toLowerCase().includes('headphones') ||
+                    p.name.toLowerCase().includes('watch')
+                );
+                return `📱 Electronics & Gadgets (${electronicsProducts.length} items available):\n\n${formatProductList(electronicsProducts)}\n\nWhat kind of electronics are you most interested in?`;
+            }
+            else if (lowerMessage.includes('sports') || lowerMessage.includes('fitness') || lowerMessage.includes('yoga') || lowerMessage.includes('running')) {
+                const sportsProducts = products.filter(p => 
+                    p.category.toLowerCase().includes('sports') || 
+                    p.name.toLowerCase().includes('yoga') ||
+                    p.name.toLowerCase().includes('running')
+                );
+                return `🏃‍♂️ Sports & Fitness (${sportsProducts.length} items available):\n\n${formatProductList(sportsProducts)}\n\nReady to get active? Which item interests you?`;
+            }
+            else if (lowerMessage.includes('home') || lowerMessage.includes('kitchen') || lowerMessage.includes('dinner')) {
+                const homeProducts = products.filter(p => 
+                    p.category.toLowerCase().includes('home') || 
+                    p.name.toLowerCase().includes('dinner')
+                );
+                return `🏠 Home & Lifestyle (${homeProducts.length} items available):\n\n${formatProductList(homeProducts)}\n\nMaking your home beautiful? Which item catches your eye?`;
+            }
+            else if (lowerMessage.includes('cheapest') || lowerMessage.includes('lowest price')) {
+                const sortedByPrice = [...products].sort((a, b) => a.price - b.price);
+                return `💰 Our Most Affordable Products:\n\n${formatProductList(sortedByPrice, 5)}\n\nThese are our best budget-friendly options!`;
+            }
+            else if (lowerMessage.includes('find') || lowerMessage.includes('search')) {
+                const searchTerm = lowerMessage.replace(/find|search|looking for|show me/g, '').trim();
+                const matchingProducts = products.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.category.toLowerCase().includes(searchTerm)
+                );
+                if (matchingProducts.length > 0) {
+                    return `🔍 Found ${matchingProducts.length} products matching "${searchTerm}":\n\n${formatProductList(matchingProducts)}\n\nWould you like more details about any of these products?`;
+                } else {
+                    return `🔍 No products found matching "${searchTerm}". Here are some suggestions:\n\n${formatProductList(products, 3)}`;
+                }
+            }
+            
+            return "I understand you're looking for product information! Try asking me about:\n• Products under a certain price\n• Specific categories like electronics or sports\n• Searching for specific items\n• Our complete product catalog";
+        }
+
+        function showChatDemo(userMessage, botResponse) {
+            const demo = document.createElement('div');
+            demo.className = 'chat-demo';
+            demo.innerHTML = `
+                <div class="user-message">${userMessage}</div>
+                <div class="bot-message">${botResponse}</div>
+            `;
+            document.getElementById('responseExamples').appendChild(demo);
+        }
+
+        function addChatMessage(userMessage, botResponse) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `
+                <div style="text-align: right; margin: 10px 0;">
+                    <div class="user-message">${userMessage}</div>
+                </div>
+                <div style="text-align: left; margin: 10px 0;">
+                    <div class="bot-message">${botResponse}</div>
+                </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Auto-setup on page load
+        window.onload = function() {
+            setupTestData();
+        };
+    </script>
+</body>
+</html>

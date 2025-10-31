@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Navigation</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 10px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Navigation Test</h1>
+    
+    <div>
+        <h2>Step 1: Authentication</h2>
+        <button onclick="checkAuth()">Check Current Auth</button>
+        <button onclick="loginAsCustomer()">Login as Customer</button>
+        <button onclick="clearAuth()">Logout</button>
+    </div>
+    
+    <div>
+        <h2>Step 2: Navigation Test</h2>
+        <button onclick="goToDashboard()">Go to Dashboard</button>
+        <button onclick="goToWishlist()">Go to Wishlist</button>
+        <button onclick="goToDashboardOverview()">Go to Dashboard Overview</button>
+    </div>
+    
+    <div>
+        <h2>Step 3: Debug</h2>
+        <button onclick="checkWishlist()">Check Wishlist Data</button>
+        <button onclick="addTestItem()">Add Test Wishlist Item</button>
+    </div>
+    
+    <div id="output" class="output"></div>
+
+    <script>
+        function checkAuth() {
+            const output = document.getElementById('output');
+            const authData = localStorage.getItem('auth-storage');
+            
+            if (authData) {
+                try {
+                    const parsed = JSON.parse(authData);
+                    const user = parsed.state?.user;
+                    if (user) {
+                        output.innerHTML = `
+                            <h3>✅ Logged In</h3>
+                            <p><strong>Name:</strong> ${user.name}</p>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Role:</strong> ${user.role}</p>
+                            <p style="color: ${user.role === 'CUSTOMER' ? 'green' : 'red'};">
+                                ${user.role === 'CUSTOMER' ? '✅ Can access Customer Dashboard' : '❌ Cannot access Customer Dashboard'}
+                            </p>
+                        `;
+                    } else {
+                        output.innerHTML = '<p style="color: red;">❌ No user data found</p>';
+                    }
+                } catch (e) {
+                    output.innerHTML = '<p style="color: red;">❌ Error parsing auth data</p>';
+                }
+            } else {
+                output.innerHTML = '<p style="color: red;">❌ Not logged in</p>';
+            }
+        }
+        
+        function loginAsCustomer() {
+            const customerAuth = {
+                state: {
+                    user: {
+                        id: "customer123",
+                        name: "Test Customer",
+                        email: "customer@example.com",
+                        role: "CUSTOMER",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(customerAuth));
+            document.getElementById('output').innerHTML = '<p style="color: green;">✅ Logged in as Customer!</p>';
+        }
+        
+        function clearAuth() {
+            localStorage.removeItem('auth-storage');
+            document.getElementById('output').innerHTML = '<p>🔓 Logged out!</p>';
+        }
+        
+        function goToDashboard() {
+            window.location.href = 'http://localhost:5174/customer-dashboard';
+        }
+        
+        function goToWishlist() {
+            window.location.href = 'http://localhost:5174/customer-dashboard?tab=wishlist';
+        }
+        
+        function goToDashboardOverview() {
+            window.location.href = 'http://localhost:5174/customer-dashboard?tab=overview';
+        }
+        
+        function checkWishlist() {
+            const wishlistData = localStorage.getItem('wishlist-storage');
+            const output = document.getElementById('output');
+            
+            if (wishlistData) {
+                try {
+                    const parsed = JSON.parse(wishlistData);
+                    output.innerHTML = `
+                        <h3>Wishlist Data:</h3>
+                        <p><strong>Items:</strong> ${parsed.state?.items?.length || 0}</p>
+                        <pre>${JSON.stringify(parsed, null, 2)}</pre>
+                    `;
+                } catch (e) {
+                    output.innerHTML = '<p style="color: red;">Error parsing wishlist data</p>';
+                }
+            } else {
+                output.innerHTML = '<p>No wishlist data found</p>';
+            }
+        }
+        
+        function addTestItem() {
+            const testItem = {
+                id: Date.now().toString(),
+                productId: "test-product-1",
+                name: "Test Product",
+                price: 29.99,
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400"
+            };
+            
+            const existingData = localStorage.getItem('wishlist-storage');
+            let wishlistData;
+            
+            if (existingData) {
+                wishlistData = JSON.parse(existingData);
+                if (!wishlistData.state.items.some(item => item.productId === testItem.productId)) {
+                    wishlistData.state.items.push(testItem);
+                }
+            } else {
+                wishlistData = {
+                    state: {
+                        items: [testItem]
+                    },
+                    version: 0
+                };
+            }
+            
+            localStorage.setItem('wishlist-storage', JSON.stringify(wishlistData));
+            document.getElementById('output').innerHTML = '<p style="color: green;">✅ Test item added to wishlist!</p>';
+        }
+    </script>
+</body>
+</html>

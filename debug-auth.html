@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Authentication</title>
+</head>
+<body>
+    <h1>Authentication Debug</h1>
+    <button onclick="checkAuth()">Check Authentication</button>
+    <button onclick="loginAsCustomer()">Login as Customer</button>
+    <button onclick="clearAuth()">Clear Auth</button>
+    <div id="output"></div>
+
+    <script>
+        function checkAuth() {
+            const output = document.getElementById('output');
+            const authData = localStorage.getItem('auth-storage');
+            
+            output.innerHTML = '<h2>Authentication Status:</h2>';
+            
+            if (authData) {
+                try {
+                    const parsed = JSON.parse(authData);
+                    output.innerHTML += '<pre>' + JSON.stringify(parsed, null, 2) + '</pre>';
+                    
+                    if (parsed.state && parsed.state.user) {
+                        const user = parsed.state.user;
+                        output.innerHTML += '<h3>User Info:</h3>';
+                        output.innerHTML += '<p><strong>Name:</strong> ' + user.name + '</p>';
+                        output.innerHTML += '<p><strong>Email:</strong> ' + user.email + '</p>';
+                        output.innerHTML += '<p><strong>Role:</strong> ' + user.role + '</p>';
+                        output.innerHTML += '<p><strong>Is Active:</strong> ' + user.isActive + '</p>';
+                        
+                        if (user.role === 'CUSTOMER') {
+                            output.innerHTML += '<p style="color: green;"><strong>✅ Can access Customer Dashboard</strong></p>';
+                        } else {
+                            output.innerHTML += '<p style="color: red;"><strong>❌ Cannot access Customer Dashboard (wrong role)</strong></p>';
+                        }
+                    } else {
+                        output.innerHTML += '<p style="color: red;"><strong>❌ No user data found</strong></p>';
+                    }
+                } catch (e) {
+                    output.innerHTML += '<p>Error parsing auth data: ' + e.message + '</p>';
+                }
+            } else {
+                output.innerHTML += '<p style="color: red;"><strong>❌ Not logged in</strong></p>';
+                output.innerHTML += '<p>You need to login to access the Customer Dashboard</p>';
+            }
+        }
+        
+        function loginAsCustomer() {
+            // Simulate login with customer account
+            const customerAuth = {
+                state: {
+                    user: {
+                        id: "customer123",
+                        name: "Test Customer",
+                        email: "customer@example.com",
+                        role: "CUSTOMER",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-jwt-token"
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(customerAuth));
+            document.getElementById('output').innerHTML = '<p style="color: green;">✅ Logged in as Customer! Now try accessing the dashboard.</p>';
+        }
+        
+        function clearAuth() {
+            localStorage.removeItem('auth-storage');
+            document.getElementById('output').innerHTML = '<p>🔓 Authentication cleared!</p>';
+        }
+    </script>
+</body>
+</html>

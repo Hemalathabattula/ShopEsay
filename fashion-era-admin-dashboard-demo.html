@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👗 Fashion-Era Admin Dashboard - Modern Fashion Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .fashion-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card h3 {
+            color: #6366f1;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .feature-icon {
+            font-size: 1.8rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-list li:before {
+            content: "✨";
+            font-size: 1rem;
+        }
+        
+        .demo-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section h2 {
+            color: #4c51bf;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .dashboard-preview {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .nav-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6366f1;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .tech-stack {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+        }
+        
+        .tech-item h4 {
+            color: #4c51bf;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .tech-list {
+            list-style: none;
+        }
+        
+        .tech-list li {
+            padding: 4px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .tech-list li:before {
+            content: "⚡";
+            margin-right: 8px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .cta-button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .cta-button.primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+        }
+        
+        .responsive-note {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👗 ShopEasy Admin Dashboard</h1>
+            <p>Modern, Secure & User-Friendly Fashion Management System</p>
+            <span class="fashion-badge">✨ PREMIUM FASHION ADMIN EXPERIENCE</span>
+        </div>
+
+        <div class="demo-section">
+            <h2>🎯 Dashboard Preview</h2>
+            <div class="dashboard-preview">
+                <div class="nav-demo">
+                    <div class="nav-item">📊 Dashboard</div>
+                    <div class="nav-item">👥 Users</div>
+                    <div class="nav-item">📦 Products</div>
+                    <div class="nav-item">🛒 Orders</div>
+                    <div class="nav-item">📝 Content</div>
+                    <div class="nav-item">📈 Analytics</div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">12,847</div>
+                        <div class="metric-label">Total Users</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2,847</div>
+                        <div class="metric-label">Products</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">1,284</div>
+                        <div class="metric-label">Orders</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$89,420</div>
+                        <div class="metric-label">Revenue</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3><span class="feature-icon">📊</span>Dashboard Overview</h3>
+                <ul class="feature-list">
+                    <li>Real-time key metrics and KPIs</li>
+                    <li>Recent orders and transactions</li>
+                    <li>Top-selling fashion items</li>
+                    <li>Popular blog posts and content</li>
+                    <li>Stock alerts and notifications</li>
+                    <li>Interactive charts and graphs</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">👥</span>User Management</h3>
+                <ul class="feature-list">
+                    <li>Customer, influencer & admin management</li>
+                    <li>Advanced filtering and search</li>
+                    <li>User activity tracking</li>
+                    <li>Role-based permissions</li>
+                    <li>Bulk actions and operations</li>
+                    <li>User analytics and insights</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">📦</span>Product Management</h3>
+                <ul class="feature-list">
+                    <li>Fashion catalog management</li>
+                    <li>Category organization (Men/Women/Kids)</li>
+                    <li>Pricing and stock level control</li>
+                    <li>Image upload and gallery</li>
+                    <li>Product variants and options</li>
+                    <li>Inventory tracking and alerts</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">🛒</span>Order Management</h3>
+                <ul class="feature-list">
+                    <li>Order processing workflow</li>
+                    <li>Status tracking (Pending/Shipped/Delivered)</li>
+                    <li>Payment information management</li>
+                    <li>Customer communication tools</li>
+                    <li>Shipping and fulfillment</li>
+                    <li>Returns and refunds processing</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">📝</span>Content Management</h3>
+                <ul class="feature-list">
+                    <li>Fashion blog post management</li>
+                    <li>Lookbook creation and editing</li>
+                    <li>Promotional banner management</li>
+                    <li>WYSIWYG editor for articles</li>
+                    <li>Media library and assets</li>
+                    <li>SEO optimization tools</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">📦</span>Inventory & Stock</h3>
+                <ul class="feature-list">
+                    <li>Real-time stock level monitoring</li>
+                    <li>Low stock alerts and notifications</li>
+                    <li>Restock management system</li>
+                    <li>Inventory movement logs</li>
+                    <li>Supplier management</li>
+                    <li>Automated reorder points</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">🎁</span>Promotions & Coupons</h3>
+                <ul class="feature-list">
+                    <li>Discount code creation and management</li>
+                    <li>Seasonal offers and campaigns</li>
+                    <li>Influencer affiliate link tracking</li>
+                    <li>Promotion performance analytics</li>
+                    <li>Customer segmentation for offers</li>
+                    <li>Automated promotion scheduling</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">💬</span>Customer Feedback</h3>
+                <ul class="feature-list">
+                    <li>Review moderation and management</li>
+                    <li>Customer inquiry response system</li>
+                    <li>Satisfaction score tracking</li>
+                    <li>Feedback analytics and insights</li>
+                    <li>Automated response templates</li>
+                    <li>Customer sentiment analysis</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">📈</span>Analytics & Reports</h3>
+                <ul class="feature-list">
+                    <li>Traffic and visitor analytics</li>
+                    <li>Sales performance reports</li>
+                    <li>Customer behavior insights</li>
+                    <li>Fashion trend analysis</li>
+                    <li>Exportable CSV reports</li>
+                    <li>Custom dashboard widgets</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3><span class="feature-icon">⚙️</span>Settings & Configuration</h3>
+                <ul class="feature-list">
+                    <li>Site settings and preferences</li>
+                    <li>SEO configuration tools</li>
+                    <li>Email template management</li>
+                    <li>Team access role management</li>
+                    <li>Payment gateway settings</li>
+                    <li>Security and backup options</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <h2 style="text-align: center; color: #4c51bf; margin-bottom: 30px;">🛠️ Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>Frontend Technologies</h4>
+                    <ul class="tech-list">
+                        <li>React 18 with TypeScript</li>
+                        <li>Tailwind CSS for styling</li>
+                        <li>Lucide React icons</li>
+                        <li>Responsive design principles</li>
+                        <li>Modern ES6+ JavaScript</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>Backend & Security</h4>
+                    <ul class="tech-list">
+                        <li>Node.js with Express</li>
+                        <li>MongoDB database</li>
+                        <li>JWT authentication</li>
+                        <li>Role-based access control</li>
+                        <li>API security best practices</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>Real-time Features</h4>
+                    <ul class="tech-list">
+                        <li>WebSocket connections</li>
+                        <li>Live notifications</li>
+                        <li>Real-time data updates</li>
+                        <li>Push notification system</li>
+                        <li>Live chat integration</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>Fashion-Specific Features</h4>
+                    <ul class="tech-list">
+                        <li>Fashion catalog management</li>
+                        <li>Seasonal trend tracking</li>
+                        <li>Influencer collaboration tools</li>
+                        <li>Lookbook creation system</li>
+                        <li>Style recommendation engine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>🚀 Experience the ShopEasy Admin Dashboard</h2>
+            <p>Modern, intuitive, and powerful fashion management at your fingertips</p>
+            
+            <div class="cta-buttons">
+                <a href="http://localhost:5176/admin-login" class="cta-button primary">
+                    🔐 Access Admin Dashboard
+                </a>
+                <a href="http://localhost:5176" class="cta-button">
+                    🏪 View Fashion Store
+                </a>
+                <a href="#" class="cta-button">
+                    📚 Documentation
+                </a>
+            </div>
+            
+            <div class="responsive-note">
+                <h3>📱 Fully Responsive Design</h3>
+                <p>The ShopEasy Admin Dashboard works seamlessly across all devices - desktop, tablet, and mobile. 
+                Manage your fashion business from anywhere, anytime.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
