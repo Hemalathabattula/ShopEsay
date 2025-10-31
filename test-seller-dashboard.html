@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Seller Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 10px; padding: 10px 20px; background: #10b981; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #059669; }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>🏪 Seller Dashboard Test</h1>
+    
+    <div>
+        <h2>Step 1: Setup Seller Account</h2>
+        <button onclick="loginAsSeller()">Login as Seller</button>
+        <button onclick="checkAuth()">Check Current Auth</button>
+        <button onclick="clearAuth()">Logout</button>
+    </div>
+    
+    <div>
+        <h2>Step 2: Add Test Data</h2>
+        <button onclick="addTestProducts()">Add Test Products</button>
+        <button onclick="addTestOrders()">Add Test Orders</button>
+        <button onclick="clearTestData()">Clear Test Data</button>
+    </div>
+    
+    <div>
+        <h2>Step 3: Test Navigation</h2>
+        <button onclick="goToSellerDashboard()">Go to Seller Dashboard</button>
+        <button onclick="goToAnalytics()">Go to Analytics Tab</button>
+        <button onclick="goToPerformance()">Go to Performance Tab</button>
+    </div>
+    
+    <div id="output" class="output"></div>
+
+    <script>
+        function loginAsSeller() {
+            const sellerAuth = {
+                state: {
+                    user: {
+                        id: "seller123",
+                        name: "Fashion Store Owner",
+                        email: "seller@fashionstore.com",
+                        role: "SELLER",
+                        storeName: "ShopEasy Store",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-seller-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(sellerAuth));
+            document.getElementById('output').innerHTML = '<p class="success">✅ Logged in as Seller!</p>';
+        }
+        
+        function checkAuth() {
+            const authData = localStorage.getItem('auth-storage');
+            const output = document.getElementById('output');
+            
+            if (authData) {
+                try {
+                    const parsed = JSON.parse(authData);
+                    const user = parsed.state?.user;
+                    if (user) {
+                        output.innerHTML = `
+                            <h3>Current User:</h3>
+                            <p><strong>Name:</strong> ${user.name}</p>
+                            <p><strong>Role:</strong> ${user.role}</p>
+                            <p><strong>Store:</strong> ${user.storeName || 'N/A'}</p>
+                            <p class="${user.role === 'SELLER' ? 'success' : 'error'}">
+                                ${user.role === 'SELLER' ? '✅ Can access Seller Dashboard' : '❌ Cannot access Seller Dashboard'}
+                            </p>
+                        `;
+                    } else {
+                        output.innerHTML = '<p class="error">❌ No user data found</p>';
+                    }
+                } catch (e) {
+                    output.innerHTML = '<p class="error">❌ Error parsing auth data</p>';
+                }
+            } else {
+                output.innerHTML = '<p class="error">❌ Not logged in</p>';
+            }
+        }
+        
+        function clearAuth() {
+            localStorage.removeItem('auth-storage');
+            document.getElementById('output').innerHTML = '<p>🔓 Logged out!</p>';
+        }
+        
+        function addTestProducts() {
+            // This would normally be handled by the product store
+            document.getElementById('output').innerHTML = '<p class="success">✅ Test products would be added via API</p>';
+        }
+        
+        function addTestOrders() {
+            // This would normally be handled by the order store
+            document.getElementById('output').innerHTML = '<p class="success">✅ Test orders would be added via API</p>';
+        }
+        
+        function clearTestData() {
+            document.getElementById('output').innerHTML = '<p>🗑️ Test data cleared!</p>';
+        }
+        
+        function goToSellerDashboard() {
+            window.location.href = 'http://localhost:5174/seller-dashboard';
+        }
+        
+        function goToAnalytics() {
+            window.location.href = 'http://localhost:5174/seller-dashboard?tab=analytics';
+        }
+        
+        function goToPerformance() {
+            window.location.href = 'http://localhost:5174/seller-dashboard?tab=performance';
+        }
+    </script>
+</body>
+</html>

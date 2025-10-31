@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🏪 Seller Wishlist Fix Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; color: white; }
+        .test-section { background: white; padding: 25px; margin: 20px 0; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .issue-box { background: #ffebee; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #f44336; }
+        .solution-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
+        .feature-card h4 { margin: 0 0 10px 0; color: #667eea; }
+        button { padding: 12px 24px; margin: 8px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .before, .after { padding: 15px; border-radius: 8px; }
+        .before { background: #ffebee; border-left: 4px solid #f44336; }
+        .after { background: #e8f5e9; border-left: 4px solid #4caf50; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 Seller Wishlist Fix</h1>
+            <p>Resolving the wishlist navigation issue for sellers</p>
+        </div>
+
+        <!-- Issue Description -->
+        <div class="test-section">
+            <h2>❌ Issue Identified</h2>
+            <div class="issue-box">
+                <h3>🐛 Problem:</h3>
+                <p><strong>When sellers click the wishlist icon in the navbar, it redirects to the seller dashboard instead of showing a wishlist page.</strong></p>
+                
+                <h4>Root Causes:</h4>
+                <ul>
+                    <li>Navbar wishlist link was hardcoded to go to customer dashboard</li>
+                    <li>Seller dashboard didn't have a wishlist tab</li>
+                    <li>No role-based routing for wishlist functionality</li>
+                    <li>Missing URL parameter handling for tab switching</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Solution Implemented -->
+        <div class="test-section">
+            <h2>✅ Solution Implemented</h2>
+            <div class="solution-box">
+                <h3>🔧 Fixes Applied:</h3>
+                <ol>
+                    <li><strong>Updated Navbar routing:</strong> Added role-based wishlist navigation</li>
+                    <li><strong>Added wishlist tab:</strong> Created dedicated wishlist tab in seller dashboard</li>
+                    <li><strong>Implemented wishlist UI:</strong> Full wishlist management interface</li>
+                    <li><strong>Added URL parameter handling:</strong> Automatic tab switching via URL</li>
+                    <li><strong>Integrated wishlist store:</strong> Connected to existing wishlist functionality</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Before vs After -->
+        <div class="test-section">
+            <h2>🔄 Before vs After</h2>
+            <div class="before-after">
+                <div class="before">
+                    <h3>❌ Before (Broken)</h3>
+                    <ul>
+                        <li>Seller clicks wishlist → Goes to customer dashboard</li>
+                        <li>No wishlist tab in seller dashboard</li>
+                        <li>Confusing user experience</li>
+                        <li>Broken navigation flow</li>
+                    </ul>
+                </div>
+                <div class="after">
+                    <h3>✅ After (Fixed)</h3>
+                    <ul>
+                        <li>Seller clicks wishlist → Goes to seller dashboard wishlist tab</li>
+                        <li>Dedicated wishlist tab with full functionality</li>
+                        <li>Smooth user experience</li>
+                        <li>Proper role-based navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Features -->
+        <div class="test-section">
+            <h2>🆕 New Seller Wishlist Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>💝 Wishlist Tab</h4>
+                    <ul>
+                        <li>Dedicated wishlist section in seller dashboard</li>
+                        <li>Beautiful grid layout for wishlist items</li>
+                        <li>Empty state with call-to-action</li>
+                        <li>Seamless integration with existing UI</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎯 Smart Navigation</h4>
+                    <ul>
+                        <li>Role-based wishlist routing</li>
+                        <li>URL parameter support (?tab=wishlist)</li>
+                        <li>Automatic tab switching</li>
+                        <li>Consistent navigation experience</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🛠️ Wishlist Management</h4>
+                    <ul>
+                        <li>View all wishlist items</li>
+                        <li>Remove items from wishlist</li>
+                        <li>Add items to cart</li>
+                        <li>Product details and pricing</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎨 Enhanced UI</h4>
+                    <ul>
+                        <li>Responsive grid layout</li>
+                        <li>Product image display</li>
+                        <li>Interactive buttons</li>
+                        <li>Consistent design language</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing Instructions -->
+        <div class="test-section">
+            <h2>🧪 How to Test the Fix</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button class="btn-success" onclick="loginAsSeller()">🏪 Login as Seller</button>
+                <button class="btn-primary" onclick="goToSellerDashboard()">📊 Open Seller Dashboard</button>
+                <button class="btn-info" onclick="testWishlistNavigation()">💝 Test Wishlist Navigation</button>
+                <button class="btn-warning" onclick="addTestWishlistItems()">➕ Add Test Items</button>
+            </div>
+
+            <div class="solution-box">
+                <h3>📋 Testing Steps:</h3>
+                <ol>
+                    <li><strong>Login as Seller:</strong> Use seller@example.com / password123</li>
+                    <li><strong>Navigate to any page:</strong> Go to homepage or product pages</li>
+                    <li><strong>Click wishlist icon:</strong> Should go to seller dashboard wishlist tab</li>
+                    <li><strong>Verify wishlist tab:</strong> Check that wishlist tab is visible and functional</li>
+                    <li><strong>Test wishlist features:</strong> Add/remove items, view details</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="test-section">
+            <h2>⚙️ Technical Implementation</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔗 Navbar Routing Fix</h4>
+                    <p><strong>Before:</strong></p>
+                    <code>/customer-dashboard?tab=wishlist</code>
+                    <p><strong>After:</strong></p>
+                    <code>
+                        user?.role === 'SELLER' <br>
+                        ? "/seller-dashboard?tab=wishlist" <br>
+                        : "/customer-dashboard?tab=wishlist"
+                    </code>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📑 New Seller Dashboard Tab</h4>
+                    <ul>
+                        <li>Added 'wishlist' to tabs array</li>
+                        <li>Imported Heart icon from lucide-react</li>
+                        <li>Connected to useWishlistStore</li>
+                        <li>Implemented full wishlist UI</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔄 URL Parameter Handling</h4>
+                    <p>Added useEffect to handle ?tab=wishlist parameter:</p>
+                    <code>
+                        const urlParams = new URLSearchParams(window.location.search);<br>
+                        const tab = urlParams.get('tab');<br>
+                        if (tab === 'wishlist') setActiveTab('wishlist');
+                    </code>
+                </div>
+
+                <div class="feature-card">
+                    <h4>💾 Store Integration</h4>
+                    <ul>
+                        <li>Connected to useWishlistStore</li>
+                        <li>Access to wishlist items</li>
+                        <li>Remove from wishlist functionality</li>
+                        <li>Add to cart integration ready</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function loginAsSeller() {
+            const sellerAuth = {
+                state: {
+                    user: {
+                        id: "seller1",
+                        name: "Fashion Store Owner",
+                        email: "seller@example.com",
+                        role: "SELLER",
+                        storeName: "ShopEasy Store",
+                        isActive: true,
+                        isEmailVerified: true
+                    },
+                    token: "fake-seller-jwt-token",
+                    isAuthenticated: true
+                },
+                version: 0
+            };
+            
+            localStorage.setItem('auth-storage', JSON.stringify(sellerAuth));
+            showOutput('✅ Logged in as Seller! You can now test the wishlist functionality.', 'success');
+        }
+
+        function goToSellerDashboard() {
+            window.open('http://localhost:5174/seller-dashboard', '_blank');
+            showOutput('🚀 Opening Seller Dashboard...', 'info');
+        }
+
+        function testWishlistNavigation() {
+            window.open('http://localhost:5174/seller-dashboard?tab=wishlist', '_blank');
+            showOutput('💝 Testing direct wishlist navigation...', 'info');
+        }
+
+        function addTestWishlistItems() {
+            // Add some test items to wishlist
+            const testItems = [
+                {
+                    id: 'test1',
+                    name: 'Wireless Headphones',
+                    price: 79.99,
+                    image: '/api/placeholder/300/200',
+                    description: 'High-quality wireless headphones with noise cancellation'
+                },
+                {
+                    id: 'test2',
+                    name: 'Smart Watch',
+                    price: 199.99,
+                    image: '/api/placeholder/300/200',
+                    description: 'Advanced smartwatch with fitness tracking'
+                },
+                {
+                    id: 'test3',
+                    name: 'Bluetooth Speaker',
+                    price: 49.99,
+                    image: '/api/placeholder/300/200',
+                    description: 'Portable Bluetooth speaker with excellent sound quality'
+                }
+            ];
+
+            const wishlistStore = {
+                state: { items: testItems },
+                version: 0
+            };
+            
+            localStorage.setItem('wishlist-storage', JSON.stringify(wishlistStore));
+            showOutput('➕ Added 3 test items to wishlist! Now test the wishlist tab.', 'success');
+        }
+
+        function showOutput(message, type = 'info') {
+            const output = document.getElementById('output');
+            output.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Auto-setup on page load
+        window.onload = function() {
+            showOutput('🏪 Seller Wishlist Fix Test Page Loaded! Click the buttons above to test the functionality.', 'info');
+        };
+    </script>
+</body>
+</html>
